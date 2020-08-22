@@ -19,12 +19,9 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
-
   router.get('/login/:id', (req, res) => {
     req.session.user_id = req.params.id;
-    // console.log('hello');
     res.redirect('/');
-  });
-
+  })
   return router;
 };
