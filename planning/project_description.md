@@ -6,3 +6,5 @@ When an order is placed the restaurant receives the order via SMS. The restauran
 Once they provide this information, the website updates for the client and also notifies them via SMS.
 
 =========
+
+=========
