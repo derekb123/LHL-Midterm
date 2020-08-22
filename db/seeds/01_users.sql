@@ -1,3 +1,13 @@
 -- Users table seeds here (Example)
-INSERT INTO users (name) VALUES ('Alice');
-INSERT INTO users (name) VALUES ('Kira');
+INSERT INTO users (
+name, email, password, phone)
+VALUES ('Caia', 'caiachuang@gmail.com', 'password', '7786289669');
+
+INSERT INTO users (
+name, email, password, phone)
+VALUES ('Derek', 'derek@gmail.com', 'password', '1234567890');
+
+INSERT INTO users (
+name, email, password, phone)
+VALUES ('Jenny', 'jenny@gmail.com', 'password', '1234567890');
+
