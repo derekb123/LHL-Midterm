@@ -1,0 +1,57 @@
+.custom-nav {
+  background: rgb(230, 5, 5);
+  width: 100vw;
+  height: 9vh;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  color:  rgb(243, 214, 171);
+  font-family: 'Caveat', cursive;
+  padding-left: 1vw;
+  padding-right: 2vw;
+
+  .nav-elements {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+
+
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .nav-button {
+    width: 7vw;
+    height: auto;
+    text-align: center;
+
+    &:hover {
+      border: 1px solid rgb(243, 214, 171);
+      text-decoration: none;
+    }
+  }
+
+  .logout {
+    font-size: 2vw;
+    text-align: center;
+  }
+
+  .nav-elem {
+    font-size: 2vw;
+    text-align: center;
+    color:  rgb(243, 214, 171);
+    margin: 1vh 2vw;
+  }
+
+  .nav-logo {
+    color: black;
+    font-family: 'Caveat', cursive;
+    font-size: 2.5vw;
+    text-shadow: 2px 2px rgb(243, 214, 171);
+  }
+}
