@@ -6,7 +6,11 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/index.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/cart.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -14,57 +18,119 @@
 </head>
 
 <body>
-  <%- include('partials/_header') %>
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <div class="nav-content">
+      <span id="logo">LOGO</span>
+      <div id="user-area">
+        <span id="user-name"></span>
 
-  <h1>Our Menu</h1>
+      </div>
+      <div class="stacked">
+        <span id="login"><b>Login</b></span>
+        <span id="logout"><b>Logout</b></span>
+      </div>
+    </div>
+  </nav>
+  <!--Header-->
+  <header>
+    <div id="image-header">
+      <img src="https://github.com/JennyC2020/LHL-Midterm/blob/master/planning/Takeout-delivery.png?raw=true">
+    </div>
+    <div>
+      <h2>Our menu</h2>
+    </div>
+  </header>
+  <main class="main-container">
+    <div class="menu-container">
 
-  <div class="container">
-    <ul style="list-style-type: none">
+      <section class="menu-group">
+        <h4 class="menu-group-title"></h4>
 
-      <li class="bg-light p-2">
-        <div class="card" style="width: 18rem;">
-          <img
-            src="https://previews.123rf.com/images/margouillat/margouillat1504/margouillat150400619/38695293-french-fries-and-ketchup.jpg"
-            class="card-img-left" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Fries</h5>
-            <p class="card-text">Fries and ketchup.</p>
-            <p>$8.99</p>
-            <a href="#" class="btn btn-dark">+</a>
-            <a href="#" class="btn btn-dark">-</a>
-          </div>
-        </div>
-      </li>
-      <li class="bg-light p-2">
-        <div class="card" style="width: 18rem;">
-          <img
-            src="https://www.thespruceeats.com/thmb/L3PsB3-RhPRTtPMT_YxwpUvu1dk=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/best-fish-and-chips-recipe-434856-Hero-5b61b89346e0fb00500f2141.jpg"
-            class="card-img-left" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Fish and chips</h5>
-            <p class="card-text">Cod and fries</p>
-            <p>$14.50</p>
-            <a href="#" class="btn btn-dark">+</a>
-            <a href="#" class="btn btn-dark">-</a>
-          </div>
-        </div>
-      </li>
-      <li class="bg-light p-2">
-        <div class="card" style="width: 18rem;">
-          <img src="https://img.cuisineaz.com/660x660/2016-07-29/i84653-spaghettis-bolognaise-rapides.jpg"
-            class="card-img-left" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Spaghettis</h5>
-            <p class="card-text">Spaghettis and tomato sauce</p>
-            <p>$18.99</p>
-            <a href="#" class="btn btn-dark">+</a>
-            <a href="#" class="btn btn-dark">-</a>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
+        <ul class="menu-items">
+          <li class="menu-item">
+            <div class="menu-image">
+              <img
+                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
+                alt="">
+            </div>
+            <div class="menu-item-text">
+              <h2 class="menu-item-title">Fries and Ketchup</h2>
+              <p class="menu-item-description">Fries and ketchup, the best in the world.
+              </p>
+            </div>
+            <span class="menu-item-price">$10.95</span>
+          </li><!-- /.menu-item -->
+        </ul><!-- /.menu-items -->
+      </section><!-- /.menu-group -->
 
+      <section class="menu-group">
+        <h4 class="menu-group-title"></h4>
+
+        <ul class="menu-items">
+          <li class="menu-item">
+            <div class="menu-image">
+              <img
+                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
+                alt="">
+            </div>
+            <div class="menu-item-text">
+              <h2 class="menu-item-title">Fish and Chips</h2>
+              <p class="menu-item-description">Your choice of fish and chips.
+              </p>
+            </div>
+            <span class="menu-item-price">$19.95</span>
+          </li><!-- /.menu-item -->
+        </ul><!-- /.menu-items -->
+      </section><!-- /.menu-group -->
+
+      <section class="menu-group">
+        <h4 class="menu-group-title"></h4>
+
+        <ul class="menu-items">
+          <li class="menu-item">
+            <div class="menu-image">
+              <img
+                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
+                alt="">
+            </div>
+            <div class="menu-item-text">
+              <h2 class="menu-item-title">Spagetthis</h2>
+              <p class="menu-item-description">Fresh made spagetthis with tomato sauce.
+              </p>
+            </div>
+            <span class="menu-item-price">$15.50</span>
+
+        </ul><!-- /.menu-items -->
+      </section><!-- /.menu-group -->
+
+    </div> <!-- /.menu-container -->
+
+    <div class="cart-container">
+      <div class="cart-header">
+        <span class="" style="font-size: 16px;font-weight: 500;color: white">Our Restaurant</span><br>
+        <span class="" style="font-size: 12px;color: white">7344 Green Drive</span>
+      </div>
+      <div class="cart-body">
+        <ul class="cart-items">
+          <li class="cart-item">
+            <div class="cart-item-quantity">1</div>
+            <h2 class="cart-item-title">Wrap, Soup & Bottled Water</h2>
+            <div class="cart-item-price">$9.95</div>
+          </li><!-- /.cart-item -->
+          <li class="cart-item">
+            <div class="cart-item-quantity">1</div>
+            <h2 class="cart-item-title">Wrap, Soup & Bottled Water</h2>
+            <div class="cart-item-price">$9.95</div>
+          </li><!-- /.cart-item -->
+
+        </ul><!-- /.cart-items -->
+      </div><!-- /.cart-body -->
+    </div><!-- /.cart-container -->
+
+  </main>
+
+  </div> <!-- /page-container -->
 </body>
 
 </html>
