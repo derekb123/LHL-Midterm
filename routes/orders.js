@@ -28,17 +28,22 @@ router.get("/", (req, res) => {
     });
 });
 
+  //General route to adjust order_items quantity in database. AJAX request to define qty.
 
-  router.post("/orders/order_id:/menu_item:/qty:/edit", (req, res) => {
+  router.post("/orders/:order_id/menu_items/:menu_item_id", (req, res) => {
     console.log('orders/id: works!');
     let query = `
-      INSERT INTO ordered_items (order_id, menu_item_id, qty)
-      VALUES ($1, $2, $3)
+      UPDATE ordered_items
+      SET qty = $3
+      WHERE order_id = $1 AND
+      menu_item = $2;
       `;
-    db.query(query, [req.params.order_id, req.params.menu_item, req.params.qty])
+    db.query(query, [req.params.order_id, req.params.menu_item_id, req.body.qty])
       .then(data => {
-        const items = data.rows;
-        res.json({ items });
+        res.send('successful order update');
+        //Use below if you want to recieve the updated row data via .json
+        //const items = data.rows;
+        //res.json({ items });
       })
       .catch(err => {
         res
@@ -47,7 +52,9 @@ router.get("/", (req, res) => {
       });
   });
 
-  router.post("/orders/id:/delete", (req, res) => {
+  // Route to zero out entire cart
+
+  router.post("/orders/:id/delete", (req, res) => {
     console.log('orders/id: works!');
     let query = `
       INSERT INTO ordered_items (order_id, menu_item_id, qty)
@@ -65,13 +72,13 @@ router.get("/", (req, res) => {
       });
   });
 
-  router.post("/orders/id:/submit", (req, res) => {
-    console.log('orders/id: works!');
+  router.post("/orders/:id", (req, res) => {
+    console.log(' works!');
     let query = `
-      INSERT INTO orders (order_status)
+      UPDATE orders (order_status)
       VALUES ($1)
       `;
-    db.query(query, [req.params.id])
+    db.query(query, 'complete')
       .then(data => {
         const items = data.rows;
         res.json({ items });
