@@ -12,11 +12,11 @@ module.exports = (db) => {
 
 //For customer & cart...
 router.get("/", (req, res) => {
-  let query = `
+  let query1 = `
     SELECT * menu_items
       FROM menu_items
     `;
-  db.query(query, )
+  db.query(query1, )
     .then(data => {
       const items = data.rows;
       res.json({ items });
