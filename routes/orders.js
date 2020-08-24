@@ -69,9 +69,9 @@ router.get("/", (req, res) => {
     console.log('orders/id: works!');
     let query = `
       INSERT INTO orders (order_status)
-      VALUES ($1, $2, $3)
+      VALUES ($1)
       `;
-    db.query(query, [req.params.id, req.params.id, 1])
+    db.query(query, [req.params.id])
       .then(data => {
         const items = data.rows;
         res.json({ items });
