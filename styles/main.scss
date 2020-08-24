@@ -1,0 +1,34 @@
+
+body {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.3;
+  color: rgb(62, 60, 73);
+}
+
+/* makes sure image fills parent container without distortion */
+img {
+  height: 100%;
+  width: 100%
+}
+
+/* resets default list indentation */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* container around all page elements */
+.page-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* container around menu and cart */
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  padding-top: 50px;
+}

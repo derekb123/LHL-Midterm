@@ -1,17 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+<head>
+  <title>Midterm Project</title>
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/menu.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/cart.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+</head>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-  </head>
+<body>
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <div class="nav-content">
+      <span id="logo">LOGO</span>
+      <div id="user-area">
+        <span id="user-name"></span>
 
-  <body>
-    <h1>Hello World!</h1>
-  </body>
+      </div>
+      <div class="stacked">
+        <span id="login"><b>Login</b></span>
+        <span id="logout"><b>Logout</b></span>
+      </div>
+    </div>
+  </nav>
+  <!--Header-->
+  <header>
+    <div id="image-header">
+      <img src="https://github.com/JennyC2020/LHL-Midterm/blob/master/planning/Takeout-delivery.png?raw=true">
+    </div>
+    <div>
+      <h2>Our menu</h2>
+    </div>
+  </header>
+  <main class="main-container">
+    <div class="menu-container">
+
+      <section class="menu-group">
+        <h4 class="menu-group-title"></h4>
+
+        <ul class="menu-items">
+          <li class="menu-item">
+            <div class="menu-image">
+              <img
+                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
+                alt="">
+            </div>
+            <div class="menu-item-text">
+              <h2 class="menu-item-title">Fries and Ketchup</h2>
+              <p class="menu-item-description">Fries and ketchup, the best in the world.
+              </p>
+            </div>
+            <span class="menu-item-price">$10.95</span>
+          </li><!-- /.menu-item -->
+        </ul><!-- /.menu-items -->
+      </section><!-- /.menu-group -->
+
+      <section class="menu-group">
+        <h4 class="menu-group-title"></h4>
+
+        <ul class="menu-items">
+          <li class="menu-item">
+            <div class="menu-image">
+              <img
+                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
+                alt="">
+            </div>
+            <div class="menu-item-text">
+              <h2 class="menu-item-title">Fish and Chips</h2>
+              <p class="menu-item-description">Your choice of fish and chips.
+              </p>
+            </div>
+            <span class="menu-item-price">$19.95</span>
+          </li><!-- /.menu-item -->
+        </ul><!-- /.menu-items -->
+      </section><!-- /.menu-group -->
+
+      <section class="menu-group">
+        <h4 class="menu-group-title"></h4>
+
+        <ul class="menu-items">
+          <li class="menu-item">
+            <div class="menu-image">
+              <img
+                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
+                alt="">
+            </div>
+            <div class="menu-item-text">
+              <h2 class="menu-item-title">Spagetthis</h2>
+              <p class="menu-item-description">Fresh made spagetthis with tomato sauce.
+              </p>
+            </div>
+            <span class="menu-item-price">$15.50</span>
+
+        </ul><!-- /.menu-items -->
+      </section><!-- /.menu-group -->
+
+    </div> <!-- /.menu-container -->
+
+    <div class="cart-container">
+      <div class="cart-header">
+        <span class="" style="font-size: 16px;font-weight: 500;color: white">Our Restaurant</span><br>
+        <span class="" style="font-size: 12px;color: white">7344 Green Drive</span>
+      </div>
+      <div class="cart-body">
+        <ul class="cart-items">
+          <li class="cart-item">
+            <div class="cart-item-quantity">1</div>
+            <h2 class="cart-item-title">Wrap, Soup & Bottled Water</h2>
+            <div class="cart-item-price">$9.95</div>
+          </li><!-- /.cart-item -->
+          <li class="cart-item">
+            <div class="cart-item-quantity">1</div>
+            <h2 class="cart-item-title">Wrap, Soup & Bottled Water</h2>
+            <div class="cart-item-price">$9.95</div>
+          </li><!-- /.cart-item -->
+
+        </ul><!-- /.cart-items -->
+      </div><!-- /.cart-body -->
+    </div><!-- /.cart-container -->
+
+  </main>
+
+  </div> <!-- /page-container -->
+</body>
+
 </html>

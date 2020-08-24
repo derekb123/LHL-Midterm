@@ -1,0 +1,45 @@
+/* css style sheet for navbar */
+nav {
+  height: 80px;
+  width: 100%;
+   background-color: #527de9;
+   color: #FFFFFF;
+   z-index: 100;
+   position: fixed;
+   top: 0px;
+ }
+
+ /* nav wrapper */
+.nav-content {
+  display: flex;
+  margin: 1.5em;
+  justify-content: space-between;
+}
+nav #logo {
+  font-family: 'Coda Caption', sans-serif;
+  font-size: 32px;
+}
+/* flexbox for button with text */
+nav .stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* text for toggle button */
+nav .stacked span {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-size: 23px;
+}
+#user-name {
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
+  font-size: 23px;
+  font-weight: bold;
+}
+#login {
+  display: block;
+  /* opacity: 1; */
+}
+#logout {
+  display: none;
+  /* opacity: 0; */
+}
