@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
+const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -20,7 +21,6 @@ db.connect();
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
-
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/styles", sass({
@@ -30,6 +30,12 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+
+// Middleware
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -83,3 +89,37 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+
+//     let query1 = `
+//       SELECT *
+//       FROM menu_items
+//       `
+//       let query2 = `
+//       INSERT oders(order_status)
+//     `
+//     // let query1 = `
+//     //   SELECT menu_items.*, orders.*
+//     //     FROM menu_items
+//     //     JOIN ordered_items ON menu_items.id = ordered_items.menu_items_id
+//     //     JOIN RIGHT orders ON ordered_items.order_id = orders.id
+//     //     WHERE orders.status = PENDING;
+//     //   `;
+
+//     db.query(query1)
+//       .then(data => {
+//         const results = data.rows;
+//         res.json({ items: results });
+//       })
+//       .then(data => {
+
+//       })
+//       .catch(err => {
+//         res
+//           .status(500)
+//           .json({ error: err.message });
+//       });
+//   // res.redirect("/api/orders");
+//   //res.render("index");
+// });
