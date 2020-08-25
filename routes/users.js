@@ -7,7 +7,7 @@
 
 const express = require("express");
 const router = express.Router();
-const sendSms = require('./routes/twilio');
+// const sendSms = require('./routes/twilio');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
