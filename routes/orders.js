@@ -102,7 +102,7 @@ module.exports = (db) => {
 
     let query3 = `
       INSERT INTO orders (user_id, order_status)
-      ($1, PENDING)
+      VALUES ($1, PENDING)
       RETURNING *;
       `;
 
