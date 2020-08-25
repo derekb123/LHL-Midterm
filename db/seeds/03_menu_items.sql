@@ -5,7 +5,7 @@ VALUES ('GRILLED SALMON', 'The soy-dijon salmon is nestled on a bed of whole gra
 
 INSERT INTO menu_items (
 dish, description, prep_time, menu_image_url, thumbnail_image_url, price)
-VALUES ('PRAWN RAVIOLI', 'slow-roasted tomato sauce, chilies, fresh herbs, crostini', 20, 'https://www.blogto.com/listings/restaurants/upload/2015/10/20151020-cactusclub590-03.jpg', '../public/images/03_pepper_steak_menu_image.jpg', 23.50);
+VALUES ('PRAWN RAVIOLI', 'Slow-roasted tomato sauce, chilies, fresh herbs, crostini', 20, 'https://www.blogto.com/listings/restaurants/upload/2015/10/20151020-cactusclub590-03.jpg', '../public/images/03_pepper_steak_menu_image.jpg', 23.50);
 
 INSERT INTO menu_items (
 dish, description, prep_time, menu_image_url, thumbnail_image_url, price)

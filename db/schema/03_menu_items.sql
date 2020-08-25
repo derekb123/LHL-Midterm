@@ -8,5 +8,5 @@ CREATE TABLE menu_items (
   prep_time INTEGER NOT NULL,
   menu_image_url VARCHAR(255) NOT NULL,
   thumbnail_image_url VARCHAR(255) NOT NULL,
-  price INTEGER  NOT NULL DEFAULT 0
+  price INTEGER NOT NULL DEFAULT 0
 );
