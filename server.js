@@ -39,6 +39,7 @@ app.use(cookieSession({
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
+
 const usersRoutes = require("./routes/users");
 const ordersRoutes = require("./routes/orders");
 const widgetsRoutes = require("./routes/widgets");
@@ -85,6 +86,8 @@ app.get("/", (req, res) => {
   // ]
 
 );
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

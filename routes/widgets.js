@@ -24,6 +24,28 @@ module.exports = (db) => {
       });
   });
 
+  //send SMS to user example code
+  // Needs to figure out user-side handled for twilio; routes? event listener? jQuery?
+  /*
+  app.post('/order', (req, res) => {
+    const { email, password, phone } = req.body;
+    const user = {
+      email,
+      password,
+      phone
+    };
+
+    userDatabase.push(user);
+
+    const msg = 'hello, this is Caia testing';
+
+    sendSms(user.phone, msg);
+
+    res.status(201).send({
+      message: 'Account created successfully, kindly check your phone to activate your account!',
+      data: user
+    })
+  });*/
 
 
   return router;
