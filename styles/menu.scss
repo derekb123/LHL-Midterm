@@ -10,7 +10,7 @@
 }
 
  .menu-group-title {
-   margin: 10px 0px 30px 12px;
+   margin: 10px 0px 30px 0px;
    font-size: 24px;
    color: #5d5d5f;
    font-family: 'Roboto Condensed', sans-serif;
@@ -26,10 +26,13 @@
   word-wrap: break-word;
 }
 .menu-image {
-  width: 30%;
+  width: 25%;
+
 }
 .menu-item-text {
   width: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding: 15px;
 }
 .menu-item-title {
   margin: 0 0 2px;
@@ -40,6 +43,7 @@
   margin: 4px 0;
   font-size: 12px;
   white-space: pre-wrap;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 .menu-item-price {
   font-size: 17px;
