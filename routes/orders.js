@@ -190,8 +190,8 @@ module.exports = (db) => {
             .catch(err => {
               res
                 .status(500)
-                .json({ error: err.message });;
-        }
+                .json({ error: err.message });
+        })
         res.send('successful order update');
       //   Use below if you want to recieve the updated row data via .json
       // })
