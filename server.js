@@ -53,7 +53,6 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
 app.get("/", (req, res) => {
   db.query('SELECT * FROM menu_items')
     .then(data => {
@@ -92,34 +91,3 @@ app.listen(PORT, () => {
 
 
 
-//     let query1 = `
-//       SELECT *
-//       FROM menu_items
-//       `
-//       let query2 = `
-//       INSERT oders(order_status)
-//     `
-//     // let query1 = `
-//     //   SELECT menu_items.*, orders.*
-//     //     FROM menu_items
-//     //     JOIN ordered_items ON menu_items.id = ordered_items.menu_items_id
-//     //     JOIN RIGHT orders ON ordered_items.order_id = orders.id
-//     //     WHERE orders.status = PENDING;
-//     //   `;
-
-//     db.query(query1)
-//       .then(data => {
-//         const results = data.rows;
-//         res.json({ items: results });
-//       })
-//       .then(data => {
-
-//       })
-//       .catch(err => {
-//         res
-//           .status(500)
-//           .json({ error: err.message });
-//       });
-//   // res.redirect("/api/orders");
-//   //res.render("index");
-// });
