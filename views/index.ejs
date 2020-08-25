@@ -34,7 +34,7 @@
     <div class="nav-content">
       <span id="logo">LOGO</span>
       <div id="user-area">
-        <span id="user-name">Welcome again name</span>
+        <span id="user-name">Welcome Jenny</span>
 
       </div>
       <div class="stacked">
@@ -57,81 +57,22 @@
         <h2 class="menu-group-title">Our Menu</h2>
 
 
+
         <ul class="menu-items">
+          <% for (const menu_item of menu_items){ %>
           <li class="menu-item">
             <div class="menu-image">
-              <img
-                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
-                alt="">
+              <img src="<%= menu_item.menu_image_url %>" alt="">
             </div>
             <div class="menu-item-text">
-              <h2 class="menu-item-title">Fries and Ketchup</h2>
-              <p class="menu-item-description">Fries and ketchup, the best in the world.</p>
+              <h2 class="menu-item-title"><%= menu_item.dish %></h2>
+              <p class="menu-item-description"><%= menu_item.description %></p>
             </div>
-            <span class="menu-item-price">$10.95</span>
-          </li><!-- /.menu-item -->
-          <li class="menu-item">
-            <div class="menu-image">
-              <img
-                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
-                alt="">
-            </div>
-            <div class="menu-item-text">
-              <h2 class="menu-item-title">Fish and Chips</h2>
-              <p class="menu-item-description">Your choice of fish and chips.</p>
-            </div>
-            <span class="menu-item-price ">$19.95</span>
-          <li class="menu-item">
-            <div class="menu-image">
-              <img
-                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
-                alt="">
-            </div>
-            <div class="menu-item-text">
-              <h2 class="menu-item-title">Fish and Chips</h2>
-              <p class="menu-item-description">Your choice of fish and chips.</p>
-            </div>
-            <span class="menu-item-price ">$19.95</span>
+            <span class="menu-item-price">$<%= menu_item.price %></span>
           </li>
-          <li class="menu-item">
-            <div class="menu-image">
-              <img
-                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
-                alt="">
-            </div>
-            <div class="menu-item-text">
-              <h2 class="menu-item-title">Fish and Chips</h2>
-              <p class="menu-item-description">Your choice of fish and chips.</p>
-            </div>
-            <span class="menu-item-price ">$19.95</span>
-          </li>
-          </li><!-- /.menu-item -->
-          <li class="menu-item">
-            <div class="menu-image">
-              <img
-                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
-                alt="">
-            </div>
-            <div class="menu-item-text">
-              <h2 class="menu-item-title">Fish and Chips</h2>
-              <p class="menu-item-description">Your choice of fish and chips.</p>
-            </div>
-            <span class="menu-item-price ">$19.95</span>
-          </li>
-          </li><!-- /.menu-item -->
-          <li class="menu-item">
-            <div class="menu-image">
-              <img
-                src="https://www.cactusclubcafe.com/wp-content/uploads/2019/05/051419_TunaPokeBowl_Header_1160px_500px_FINAL2.jpg"
-                alt="">
-            </div>
-            <div class="menu-item-text">
-              <h2 class="menu-item-title">Fish and Chips</h2>
-              <p class="menu-item-description">Your choice of fish and chips.</p>
-            </div>
-            <span class="menu-item-price ">$19.95</span>
-          </li>
-          </li><!-- /.menu-item -->
+          <% } %>
+
+          <!-- /.menu-item -->
 
         </ul><!-- /.menu-items -->
       </section><!-- /.menu-group -->
@@ -150,12 +91,12 @@
         <ul class="cart-items">
           <li class="cart-item">
             <div class="cart-item-quantity">1</div>
-            <h2 class="cart-item-title">Wrap, Soup & Bottled Water</h2>
+            <h2 class="cart-item-title">Fries and ketchup</h2>
             <div class="cart-item-price">$9.95</div>
           </li><!-- /.cart-item -->
           <li class="cart-item">
             <div class="cart-item-quantity">1</div>
-            <h2 class="cart-item-title">Wrap, Soup & Bottled Water</h2>
+            <h2 class="cart-item-title">Fish and chips</h2>
             <div class="cart-item-price">$9.00</div>
           </li><!-- /.cart-item -->
 
@@ -169,7 +110,7 @@
       </div><!-- /.cart-body -->
 
       <div class="cart-footer">
-        <button type="button" class="btn btn-dark btn-block" type="submit">Place your oder</button>
+        <button type="button" class="btn btn-dark btn-block" type="submit">Order now</button>
       </div>
     </div><!-- /.cart-container -->
 
