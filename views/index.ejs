@@ -23,7 +23,8 @@
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
 
   <!-- Scripts -->
-
+  <script type="text/javascript" src="/scripts/menus.js"></script>
+  <script type="text/javascript" src="/scripts/cart.js"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
@@ -32,9 +33,9 @@
   <!-- Top nav bar (fixed) -->
   <nav>
     <div class="nav-content">
-      <span id="logo">LOGO</span>
+      <span id="logo">RestO</span>
       <div id="user-area">
-        <span id="user-name">Welcome Jenny</span>
+        <span id="user-name">Welcome USERNAME</span>
 
       </div>
       <div class="stacked">
@@ -56,8 +57,6 @@
       <section class="menu-group">
         <h2 class="menu-group-title">Our Menu</h2>
 
-
-
         <ul class="menu-items">
           <% for (const menu_item of menu_items){ %>
           <li class="menu-item">
@@ -69,55 +68,58 @@
               <p class="menu-item-description"><%= menu_item.description %></p>
             </div>
             <span class="menu-item-price">$<%= menu_item.price %></span>
+
+            <div class="order_button">
+              <button id="into-cart" type="submit" class="btn btn-info">Add to cart</button>
+            </div>
           </li>
           <% } %>
 
-          <!-- /.menu-item -->
+        </ul>
+      </section>
 
-        </ul><!-- /.menu-items -->
-      </section><!-- /.menu-group -->
+      </section>
 
-      </section><!-- /.menu-group -->
-
-    </div> <!-- /.menu-container -->
+    </div>
 
     <div class="cart-container">
       <div class="cart-header">
-        <span class="" style="font-size: 16px;font-weight: 500;color: white">Our Restaurant</span><br>
+        <span class="" style="font-size: 16px;font-weight: 500;color: white">JenCaiDer Restaurant</span><br>
         <span class="" style="font-size: 12px;color: white">7344 Green Drive</span>
         <span class="" style="font-size: 12px;color: white">Vancouver, BC, V8R3T8</span>
       </div>
-      <div class="cart-body">
-        <ul class="cart-items">
-          <li class="cart-item">
-            <div class="cart-item-quantity">1</div>
-            <h2 class="cart-item-title">Fries and ketchup</h2>
-            <div class="cart-item-price">$9.95</div>
-          </li>
-          <li class="cart-item">
-            <div class="cart-item-quantity">1</div>
-            <h2 class="cart-item-title">Fish and chips</h2>
-            <div class="cart-item-price">$9.00</div>
-          </li>
+      <div class="hide-cart">
+        <div class="cart-body">
+          <ul class="cart-items">
+            <li class="cart-item">
+              <div class="cart-item-quantity">1</div>
+              <h2 class="cart-item-title">XXXXX</h2>
+              <div class="cart-item-price">$xx.xx</div>
+            </li>
+            <li class="cart-item">
+              <div class="cart-item-quantity">1</div>
+              <h2 class="cart-item-title">XXXXX</h2>
+              <div class="cart-item-price">$xx.xx</div>
+            </li>
 
-        </ul>
-
-        <div class="cart-total">
-          <div class="cart-total-label"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">Total</span>
+          </ul>
+          <div class="cart-total">
+            <div class="cart-total-label"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">Total</span>
+            </div>
+            <div class="cart-total-amount"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">xx.00</span>
+            </div>
           </div>
-          <div class="cart-total-amount"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">$25.44</span>
-          </div>
-        </div><!-- /.cart-total -->
-      </div><!-- /.cart-body -->
+        </div>
 
-      <div class="cart-footer">
-        <button type="button" class="btn btn-dark btn-block" type="submit">ADD PAYMENT</button>
+        <div class="cart-footer">
+          <button type="button" class="btn btn-dark btn-block" type="submit">Order now</button>
+        </div>
       </div>
-    </div><!-- /.cart-container -->
+    </div>
 
   </main>
 
-  </div> <!-- /page-container -->
+  </div>
 
 </body>
 
@@ -125,8 +127,8 @@
 <footer class="page-footer font-small blue">
 
   <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 Our Restaurant
-    <a href="https://mdbootstrap.com/"> 1-888-123-1234</a>
+  <div class="footer-copyright text-center py-3">© 2020 RestO | Open daily 11am - 10pm |
+    <a href="https://mdbootstrap.com/">Phone : 1-888-123-1234</a>
   </div>
   <!-- Copyright -->
 
