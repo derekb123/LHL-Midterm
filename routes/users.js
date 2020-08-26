@@ -23,7 +23,7 @@ module.exports = (db) => {
   });
 
   //make user login from the beginning
-  router.get("/login/1", (req, res) => {
+  router.get("/login/:id", (req, res) => {
     req.session.user_id = req.params.id;
     // console.log('hello');
     res.redirect("/");
