@@ -1,7 +1,7 @@
 /*
- * All routes for Widgets are defined here
- * Since this file is loaded in server.js into api/widgets,
- *   these routes are mounted onto /widgets
+ * All routes for orders are defined here
+ * Since this file is loaded in server.js into api/orders,
+ *   these routes are mounted onto /orders
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -12,10 +12,7 @@ module.exports = (db) => {
 
 //For orders. The "cart" is an order with order_status: pending.
 
-  //General route to adjust order_items quantity in database. AJAX request to define qty.
-
-
-// const db = require("../w4/tweeter/server/lib/in-memory-db");
+//General route to adjust order_items quantity in database. AJAX request to define qty.
 
 const updateOrderItem = (order_id, menu_item_id, qty) => {
   let updateOrderQuery = `
@@ -43,6 +40,18 @@ const createNewOrderItem = (order_id, menu_item_id)  => {
       })
 };
 
+const deleteOrderItem = (order_id, menu_item_id)  => {
+  let deleteOrderItemQuery = `
+      DELETE FROM ordered_items
+      WHERE order_id = $1 AND
+      menu_item_id = $2;
+      `;
+    return db.query(deleteOrderItemQuery, [order_id, menu_item_id])
+      .then(data => {
+        return {message: 'order item deleted'};
+      })
+};
+
 const createNewOrder = (user_id, menu_item_id) => {
   let createOrderQuery = `
   INSERT INTO orders (user_id, order_status)
@@ -58,7 +67,7 @@ const createNewOrder = (user_id, menu_item_id) => {
       return createNewOrderItem(newOrder.id, menu_item_id)
     })
     .then(data => {
-      return {message: 'created cart'}
+      return {message: 'created cart and added order item'}
     })
 };
 
@@ -73,7 +82,7 @@ router.post("/:order_id/menu_items/:menu_item_id", (req, res) => {
       promise = createNewOrderItem(order_id, menu_item_id)
     }
     else if (qty < 1) {
-      // promise = deleteOrderItem(order_id, menu_item_id);
+      promise = deleteOrderItem(order_id, menu_item_id);
     }
     else{
       promise = updateOrderItem(order_id, menu_item_id, req.body.qty)
@@ -94,31 +103,32 @@ router.post("/:order_id/menu_items/:menu_item_id", (req, res) => {
 
 
 
-  router.post("/orders/:ordered_item_id/delete", (req, res) => {
-    console.log('orders/id: works!');
-    let query = `
-      DELETE FROM ordered_items
-      WHERE ordered_items.id = $1;
-      `;
-    db.query(query, [req.params.ordered_item_id])
-      .then(data => {
-        const items = data.rows;
-        res.json({ items });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+  // router.post("/orders/:ordered_item_id/delete", (req, res) => {
+  //   console.log('orders/id: works!');
+  //   let query = `
+  //     DELETE FROM ordered_items
+  //     WHERE ordered_items.id = $1;
+  //     `;
+  //   db.query(query, [req.params.ordered_item_id])
+  //     .then(data => {
+  //       const items = data.rows;
+  //       res.json({ items });
+  //     })
+  //     .catch(err => {
+  //       res
+  //         .status(500)
+  //         .json({ error: err.message });
+  //     });
+  // });
 
-  router.post("/orders/:id", (req, res) => {
+  router.post("/orders/:id/submit", (req, res) => {
     console.log(' works!');
     let query = `
       UPDATE orders (order_status)
       VALUES ($1)
+      WHERE orders.id = $2;
       `;
-    db.query(query, 'complete')
+    db.query(query, 'complete', req.params.id)
       .then(data => {
         const items = data.rows;
         res.json({ items });
