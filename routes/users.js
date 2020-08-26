@@ -7,12 +7,14 @@
 
 const express = require("express");
 const router = express.Router();
+// const sendSms = require('./routes/twilio');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const users = data.rows;
+        req.session.user_id = users[0].id;
         res.json({ users });
       })
       .catch((err) => {
@@ -20,7 +22,8 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/login/:id", (req, res) => {
+  //make user login from the beginning
+  router.get("/login/1", (req, res) => {
     req.session.user_id = req.params.id;
     // console.log('hello');
     res.redirect("/");
