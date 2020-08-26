@@ -14,6 +14,7 @@ module.exports = (db) => {
     db.query(`SELECT * FROM users;`)
       .then((data) => {
         const users = data.rows;
+        req.session.user_id = users[0].id;
         res.json({ users });
       })
       .catch((err) => {

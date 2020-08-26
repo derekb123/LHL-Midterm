@@ -79,7 +79,7 @@ router.post("/:order_id/menu_items/:menu_item_id", (req, res) => {
       promise = updateOrderItem(order_id, menu_item_id, req.body.qty)
     }
   } else{
-    promise = createNewOrder(user_id, menu_item_id, {qty: req.body.qty});
+    promise = createNewOrder(req.session.user_id, menu_item_id, {qty: req.body.qty});
   }
   promise.then(data => {
     res.send(data.message);
