@@ -156,13 +156,7 @@ const createNewOrder = (user_id, menu_item_id) => {
   let createOrderQuery = `
   INSERT INTO orders (user_id, order_status)
   ($1, 'PENDING')
-  RETURNING *
-  ON CONFLICT (order_status)
-  DO
-    UPDATE ordered_items SET qty = $3
-    WHERE order_id = $2 AND
-    menu_item_id = $4;
-     ;
+  RETURNING *;
   `;
   return db.query(createOrderQuery, [user_id])
     .then(data => {
@@ -185,7 +179,7 @@ router.post("/:order_id", (req, res) => {
   const {qty, menu_item_id} = req.body;
   console.log(req.body);
   if (order_id) {
-    if (req.body.qty === 0) {
+    if (!req.body.qty) {
       console.log('create new order item');
       promise = createNewOrderItem(order_id, menu_item_id)
     }
