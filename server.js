@@ -60,29 +60,6 @@ app.get("/", (req, res) => {
       res.render("index", { menu_items }); //pushes menu from database to the homepage
     })
 }
-
-
-  // menu_items = [
-  //   {
-  //     dish: "Fries",
-  //     description: "Fries with ketchup",
-  //     menu_image_url: 'https://www.cactusclubcafe.com/wp-content/uploads/2020/04/CC_180523_MiniCrispyChickenSandwich_H8827_edited_revised_extended_800x800_web.jpg',
-  //     price: 25.50
-  //   },
-  //   {
-  //     dish: "Fries",
-  //     description: "Fries with ketchup",
-  //     menu_image_url: 'https://www.cactusclubcafe.com/wp-content/uploads/2020/04/CC_180523_MiniCrispyChickenSandwich_H8827_edited_revised_extended_800x800_web.jpg',
-  //     price: 25.50
-  //   },
-  //   {
-  //     dish: "Fries",
-  //     description: "Fries with ketchup",
-  //     menu_image_url: 'https://www.cactusclubcafe.com/wp-content/uploads/2020/04/CC_180523_MiniCrispyChickenSandwich_H8827_edited_revised_extended_800x800_web.jpg',
-  //     price: 25.50
-  //   }
-  // ]
-
 );
 
 app.listen(PORT, () => {
