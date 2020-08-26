@@ -15,7 +15,7 @@ module.exports = (db) => {
   //General route to adjust order_items quantity in database. AJAX request to define qty.
 
 
-  const db = require("../w4/tweeter/server/lib/in-memory-db");
+// const db = require("../w4/tweeter/server/lib/in-memory-db");
 
 const updateOrderItem = (order_id, menu_item_id, qty) => {
   let updateOrderQuery = `
