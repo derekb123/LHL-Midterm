@@ -27,5 +27,13 @@ module.exports = (db) => {
     res.redirect("/");
   });
 
+  router.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.send({});
+  });
+
   return router;
 };
+
+
+

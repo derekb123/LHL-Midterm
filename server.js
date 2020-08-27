@@ -69,8 +69,7 @@ app.get("/", (req, res) => {
       const menu_items = data.rows
       res.render("index", { menu_items }); //pushes menu from database to the homepage
     })
-}
-);
+});
 
 
 app.listen(PORT, () => {
