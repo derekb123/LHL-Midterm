@@ -8,7 +8,6 @@
 const express = require("express");
 const router = express.Router();
 
-
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT * FROM users;`)
@@ -27,5 +26,13 @@ module.exports = (db) => {
     res.redirect("/");
   });
 
+  router.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    res.send({});
+  });
+
   return router;
 };
+
+
+

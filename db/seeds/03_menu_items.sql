@@ -14,3 +14,15 @@ VALUES ('STEAK FRITES', '8oz certified angus beef® sirloin, kale salad, horsera
 INSERT INTO menu_items (
 dish, description, prep_time, menu_image_url, thumbnail_image_url, price)
 VALUES ('West Coast Salad', 'Pacific West Coast Salmon on a bed of fresh greens', 20, 'https://www.cactusclubcafe.com/wp-content/uploads/2020/07/CC_190405_RaincoastSalad_H2170_1920x1080_web.jpg', '../public/images/01_grilled_salmon_menu_image.jpg', 20.95);
+
+INSERT INTO menu_items (
+dish, description, prep_time, menu_image_url, thumbnail_image_url, price)
+VALUES ('Prawn Perrogies', 'White cream sauce, chilies, fresh herbs, ', 20, 'https://www.blogto.com/listings/restaurants/upload/2015/10/20151020-cactusclub590-03.jpg', '../public/images/03_pepper_steak_menu_image.jpg', 18.50);
+
+INSERT INTO menu_items (
+dish, description, prep_time, menu_image_url, thumbnail_image_url, price)
+VALUES ('Top Sirloin', 'Certified angus beef® sirloin on a bed of green beans', 20, 'https://www.blogto.com/listings/restaurants/upload/2015/10/20151020-cactusclub590-07.jpg', '../public/images/03_pepper_steak_menu_image.jpg', 47.50);
+
+INSERT INTO menu_items (
+dish, description, prep_time, menu_image_url, thumbnail_image_url, price)
+VALUES ('Cod Salad', 'Pacific Cod with fresh greens', 20, 'https://www.cactusclubcafe.com/wp-content/uploads/2020/07/CC_190405_RaincoastSalad_H2170_1920x1080_web.jpg', '../public/images/01_grilled_salmon_menu_image.jpg', 27.95);
