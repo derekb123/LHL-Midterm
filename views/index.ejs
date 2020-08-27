@@ -33,26 +33,17 @@
 </head>
 
 <body>
-  <!-- Top nav bar (fixed) -->
   <nav>
-    <div class="nav-content">
-      <span id="logo">RestO</span>
-      <div id="user-area">
-        <span id="user-name">Welcome "Username goes here"</span>
-      </div>
-      <div class="stacked">
-        <span id="login"><b>Logout</b></span>
-
-      </div>
-    </div>
+    <%- include("./partials/_navbar") %>
   </nav>
-  <!--Header-->
+
   <header>
-    <div id="image-header">
+    <%- include("./partials/_header") %>
+    <!-- <div id="image-header">
       <img src="https://github.com/JennyC2020/LHL-Midterm/blob/master/planning/Takeout-delivery.png?raw=true">
     </div>
     <div>
-    </div>
+    </div> -->
   </header>
   <main class="main-container">
     <div class="menu-container">
@@ -115,7 +106,7 @@
         </div>
 
         <div class="cart-footer">
-          <button id = "order_button" type="button" class="btn btn-dark btn-block" type="submit">Order now</button>
+          <button id="order_button" type="button" class="btn btn-dark btn-block" type="submit">Order now</button>
         </div>
       </div>
     </div>
@@ -126,16 +117,8 @@
 
 </body>
 
-<!-- Footer -->
-<footer class="page-footer font-small blue">
-
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 RestO | Open daily 11am - 10pm |
-    <a href="https://mdbootstrap.com/">Phone : 1-888-123-1234</a>
-  </div>
-  <!-- Copyright -->
-
+<footer>
+  <%- include("./partials/_footer") %>
 </footer>
-<!-- Footer -->
 
 </html>
