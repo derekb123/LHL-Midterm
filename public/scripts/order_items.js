@@ -3,7 +3,7 @@ const { json } = require("body-parser");
 
 $(document).ready(function() {
 
-  //empties pre-existing tweets from container, renders and adds the new tweet @ top of list
+  //empties pre-existing items from container, renders and adds the new item @ top of list
     const renderCartItems = function(cartItemsArr) {
       $(".cart-items").empty();
       for (const cartItem of cartItemsArr) {
@@ -17,7 +17,6 @@ $(document).ready(function() {
       const $cartItem =(`
         <li class="cart-item">
           <div class="cart-item-quantity">${orderItem.qty}</div>
-          <div class="cart-item-image">${orderItem.thumbnail_image_url}</div>
           <h2 class="cart-item-title">${orderItem.dish}</h2>
           <div class="cart-item-price">${orderItem.price}</div>
         </li>
@@ -28,9 +27,10 @@ $(document).ready(function() {
   //Way to use variable to access any button clicked..?
   // let $addItemButton = $(`#into-cart${menu_item_id}`);
 
-  let $addItemButton = $(`#into-cart_1`);
+  let $addItemButton = $(`#into-cart`);
   $addItemButton.on('click', (event) => {
     event.preventDefault();
+  //need to use "target" button?
     let menu_item_id = $addItemButton.dataset.menu.id
     let order_id = localStorage.getItem("order_id");
     const stringified = JSON.stringify({"qty" : 1, "menu_item_id" : menu_item_id});
@@ -45,7 +45,7 @@ $(document).ready(function() {
   });
 });
 
-
+  //***NOTES***/
   //INCREMENT QUANITY: QTY ++
 
   //JSON.stringify instead of serialize
