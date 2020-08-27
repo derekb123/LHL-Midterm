@@ -26,7 +26,7 @@ const createNewOrderItem = (order_id, menu_item_id, qty)  => {
     ON CONSTRAINT ordered_items_unique
     DO
       UPDATE
-      SET qty = $3
+      SET qty = $3 + (SELECT qty from ordered_items WHERE ordered_items.order_id = $1 AND ordered_items.menu_item_id = $2)
       WHERE ordered_items.order_id = $1 AND
       ordered_items.menu_item_id = $2
     RETURNING *;
@@ -72,14 +72,32 @@ const createNewOrder = (user_id, menu_item_id, qty) => {
     // })
 };
 
+const checkStatus = (order_id) => {
+  let checkStatusQuery = `
+  SELECT order_status
+  FROM orders
+  WHERE order_id = $1;
+  `;
+  return db.query(checkStatusQuery, [order_id])
+    .then(data => {
+      const order_status = data.rows;
+      return order_status;
+    });
+    // .then(data => {
+    //   return {message: 'created cart and added order item'}
+    // })
+};
+
 
 
 router.post("/:order_id?", (req, res) => {
   let promise = Promise.resolve()
   const {order_id} = req.params;
   const {qty, menu_item_id} = req.body;
+  const orderSTATUS = checkStatus(order_id);
+  console.log(orderSTATUS);
   console.log(req.body);
-  if (order_id/*.status === 'PENDING'*/) {
+  if (order_id /*&& order_satus === 'PENDING'*/) {
     if (qty) {
       console.log('create new order item');
       promise = createNewOrderItem(order_id, menu_item_id, qty)
