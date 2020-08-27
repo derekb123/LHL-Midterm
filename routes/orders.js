@@ -15,103 +15,6 @@ module.exports = (db) => {
 
 //General route to adjust order_items quantity in database. AJAX request to define qty.
 
-// const updateOrderItem = (order_id, menu_item_id, qty) => {
-//   let updateOrderQuery = `
-//   UPDATE ordered_items
-//   SET qty = $3
-//   WHERE order_id = $1 AND
-//   menu_item_id = $2;
-//   `;
-//   return db.query(updateOrderQuery, [order_id, menu_item_id, qty])
-//     .then(data => {
-//       return {message: 'updated order'};
-//     })
-// };
-
-// const createNewOrderItem = (order_id, menu_item_id)  => {
-//   let newOrderItemQuery = `
-//     INSERT INTO ordered_items (order_id, menu_item_id, qty)
-//     ($1, $2, $3)
-//     RETURNING *;
-//     `;
-//     return db.query(newOrderItemQuery, [order_id, menu_item_id, 1])
-//       .then(data => {
-//         const newOrderItem = data.rows[0];
-//         return newOrderItem;
-//       })
-// };
-
-// const deleteOrderItem = (order_id, menu_item_id)  => {
-//   let deleteOrderItemQuery = `
-//       DELETE FROM ordered_items
-//       WHERE order_id = $1 AND
-//       menu_item_id = $2;
-//       `;
-//     return db.query(deleteOrderItemQuery, [order_id, menu_item_id])
-//       .then(data => {
-//         return {message: 'order item deleted'};
-//       })
-// };
-
-// const createNewOrder = (user_id, menu_item_id) => {
-//   let createOrderQuery = `
-//   INSERT INTO orders (user_id, order_status)
-//   ($1, 'PENDING')
-//   RETURNING *;
-//   `;
-//   return db.query(createOrderQuery, [user_id])
-//     .then(data => {
-//       const newOrder = data.rows[0];
-//       return newOrder;
-//     })
-//     .then(newOrder => {
-//       return createNewOrderItem(newOrder.id, menu_item_id)
-//     })
-//     .then(data => {
-//       return {message: 'created cart and added order item'}
-//     })
-// };
-
-
-// router.post("/:order_id/menu_items/:menu_item_id", (req, res) => {
-//   // console.log('orders/id: works!');
-//   let promise = Promise.resolve()
-//   const {order_id, menu_item_id} = req.params;
-//   const {qty} = req.body;
-//   if (order_id) {
-//     if (req.body.qty === undefined) {
-//       promise = createNewOrderItem(order_id, menu_item_id)
-//     }
-//     else if (qty < 1) {
-//       promise = deleteOrderItem(order_id, menu_item_id);
-//     }
-//     else{
-//       promise = updateOrderItem(order_id, menu_item_id, req.body.qty)
-//     }
-//   } else{
-//     promise = createNewOrder(user_id, menu_item_id, {qty: req.body.qty});
-//   }
-//   promise.then(data => {
-//     res.send(data.message);
-//       })
-//     .catch(err => {
-//       console.error(err);
-//       res
-//         .status(500)
-//         .json({ error: err.message });
-//     });
-// });
-
-
-// INSERT INTO orders (user_id, order_status)
-//     VALUES ($1, 'PENDING')
-//     RETURNING *
-//     ON CONFLICT (order_status)
-//     DO
-//       UPDATE ordered_items SET qty = $3
-//       WHERE order_id = $2 AND
-//       menu_item_id = $4;
-//     `;
 
 
 // UPSERT UPDATE AND INSERT ORDER ITEM ID
@@ -135,33 +38,6 @@ const createNewOrderItem = (order_id, menu_item_id, qty)  => {
         return order_id;
       })
 };
-
-// const createNewOrderItem = (order_id, menu_item_id)  => {
-//   let newOrderItemQuery = `
-//     INSERT INTO ordered_items (order_id, menu_item_id, qty)
-//     VALUES ($1, $2, $3)
-//     RETURNING *;
-//     `;
-//     return db.query(newOrderItemQuery, [order_id, menu_item_id, 1])
-//       .then(data => {
-//         const newOrderItem = data.rows[0];
-//         return newOrderItem;
-//       })
-// };
-
-// const updateOrderItem = (order_id, menu_item_id, qty) => {
-//   let updateOrderQuery = `
-//   UPDATE ordered_items
-//   SET qty = $3
-//   WHERE order_id = $1 AND
-//   menu_item_id = $2;
-//   `;
-//   console.log(updateOrderQuery, [order_id, menu_item_id, qty]);
-//   return db.query(updateOrderQuery, [order_id, menu_item_id, qty])
-//     .then(data => {
-//       return {message: 'updated order item'};
-//     })
-// };
 
 
 const deleteOrderItem = (order_id, menu_item_id)  => {
@@ -197,13 +73,13 @@ const createNewOrder = (user_id, menu_item_id, qty) => {
 };
 
 
+
 router.post("/:order_id?", (req, res) => {
-  // console.log('orders/id: works!');
   let promise = Promise.resolve()
   const {order_id} = req.params;
   const {qty, menu_item_id} = req.body;
   console.log(req.body);
-  if (order_id) {
+  if (order_id/*.status === 'PENDING'*/) {
     if (qty) {
       console.log('create new order item');
       promise = createNewOrderItem(order_id, menu_item_id, qty)
@@ -221,10 +97,15 @@ router.post("/:order_id?", (req, res) => {
     promise = createNewOrder(/*req.session.user_id*/ 1, menu_item_id, req.body.qty);
   }
   promise.then(orderID => {
-    return db.query('SELECT * FROM orders where orders.id = $1;', [orderID])
+    //return db.query('SELECT * FROM orders where orders.id = $1;', [orderID])
+    return db.query(`SELECT ordered_items.*, menu_items.*
+    FROM ordered_items
+    JOIN menu_items
+    ON menu_item_id = menu_items.id
+    WHERE order_id = $1;`, [orderID])
     .then(data => {
       console.log('end of route');
-      const order = data.rows[0];
+      const order = data.rows;
       res.send(order);
       })
     .catch(err => {
@@ -292,11 +173,14 @@ router.post("/:order_id/submit/", (req, res) => {
 
   // router.post("/orders/:ordered_item_id/delete", (req, res) => {
   //   console.log('orders/id: works!');
+  // router.post("/orders/:id/submit", (req, res) => {
+  //   console.log(' works!');
   //   let query = `
-  //     DELETE FROM ordered_items
-  //     WHERE ordered_items.id = $1;
+  //     UPDATE orders (order_status)
+  //     VALUES ($1)
+  //     WHERE orders.id = $2;
   //     `;
-  //   db.query(query, [req.params.ordered_item_id])
+  //   db.query(query, ['complete', req.params.id])
   //     .then(data => {
   //       const items = data.rows;
   //       res.json({ items });
