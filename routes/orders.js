@@ -71,9 +71,6 @@ const createNewOrder = (user_id, menu_item_id, qty) => {
     // })
 };
 
-let responseQuery = `
-
-`
 
 
 router.post("/:order_id?", (req, res) => {
@@ -102,12 +99,12 @@ router.post("/:order_id?", (req, res) => {
     //return db.query('SELECT * FROM orders where orders.id = $1;', [orderID])
     return db.query(`SELECT ordered_items.*, menu_items.*
     FROM ordered_items
-    FULL OUTER JOIN menu_items
+    JOIN menu_items
     ON menu_item_id = menu_items.id
     WHERE order_id = $1;`, [orderID])
     .then(data => {
       console.log('end of route');
-      const order = data.rows[0];
+      const order = data.rows;
       res.send(order);
       })
     .catch(err => {
