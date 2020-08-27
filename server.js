@@ -50,14 +50,13 @@ app.use(session({
 
 const usersRoutes = require("./routes/users");
 const ordersRoutes = require("./routes/orders");
-const widgetsRoutes = require("./routes/widgets");
 //const testRoutes = require("./routes/test_oders");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/orders", ordersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+
 //app.use("/api/test_orders", testRoutes(db)); // /api/test_orders/menu_items/3/newOrder   /api/test_orders/menu_items/3/rohitOrder
 // Note: mount other resources here, using the same pattern above
 

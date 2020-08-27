@@ -1,21 +1,10 @@
-const sendSms = require('./twilio');
-
-
 $(() => {
-  $('.cart_footer').click( function() {
+  $('#order_button').click( function() {
     event.preventDefault();
+    console.log("in order button");
     $.ajax({
       method: "POST",
-      url: "/api/orders"
-      data:
-    }).done((users) => {
-      for(user of users) {
-        $("<div>").text(user.name).appendTo($("body"));
-      }
-    });;
-    const msg = 'Your order will be ready in 20 minutes';
-    console.log('send msg to customer')
-    sendSms(msg);
+      url: "/api/orders/1/submit/"
+    })
   });
-
 });
