@@ -6,7 +6,6 @@ $(document).ready(function() {
   //empties pre-existing items from container, renders and adds the new item @ top of list
     const renderCartItems = function(cartItemsArr) {
       $("#cart-items").empty();
-      console.log($("#cart-items"));
       for (const cartItem of cartItemsArr) {
         const $cartItemRender = createCartItem(cartItem);
         $("#cart-items").prepend($cartItemRender);
@@ -29,14 +28,9 @@ $(document).ready(function() {
   // let $addItemButton = $(`#into-cart${menu_item_id}`);
 
   let $addItemButton = $('.order_button');
-  console.log($($addItemButton));
-  console.log($($addItemButton).data( "menu-id" ));
   $addItemButton.on('click', function(event) {
     event.preventDefault();
   //need to use "target" button?
-    console.log($(event.target));
-    console.log($(this));
-    console.log($(this).data( "menu-id" ));
     let menu_item_id = Number($(this).data( "menu-id" ));
     let order_id = localStorage.getItem("order_id") ? localStorage.getItem("order_id") : '';
 
