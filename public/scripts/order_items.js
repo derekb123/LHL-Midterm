@@ -25,7 +25,10 @@ $(document).ready(function() {
     return $cartItem;
   }
 
-  let $addItemButton = $(`#into-cart${menu_item_id}`);
+  //Way to use variable to access any button clicked..?
+  // let $addItemButton = $(`#into-cart${menu_item_id}`);
+
+  let $addItemButton = $(`#into-cart_1`);
   $addItemButton.on('click', (event) => {
     event.preventDefault();
     let menu_item_id = $addItemButton.dataset.menu.id
