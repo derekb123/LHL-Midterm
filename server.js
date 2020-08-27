@@ -10,6 +10,7 @@ const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
 const session = require('express-session');
+const cookieSession = require('cookie-session');
 
 
 // PG database client/connection setup
@@ -32,18 +33,18 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
-app.use(session({
-  secret: '239rdkslfkdm29slkda30jlma',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
+// app.use(session({
+//   secret: '239rdkslfkdm29slkda30jlma',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: { secure: true }
+// }))
 
 // Middleware
-// app.use(cookieSession({
-//   name: 'session',
-//   keys: ['key1', 'key2']
-// }));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -61,14 +62,34 @@ app.use("/api/widgets", widgetsRoutes(db));
 //app.use("/api/test_orders", testRoutes(db)); // /api/test_orders/menu_items/3/newOrder   /api/test_orders/menu_items/3/rohitOrder
 // Note: mount other resources here, using the same pattern above
 
+
+app.get('/login/:id', (req, res) => {
+  req.session.user_id = req.params.id;
+  res.redirect('/');
+});
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
+  console.log("Req:", req.session);
+  let menu_items;
   db.query('SELECT * FROM menu_items')
     .then(data => {
-      const menu_items = data.rows
-      res.render("index", { menu_items }); //pushes menu from database to the homepage
+      menu_items = data.rows
+      if (req.session.user_id) {
+        return db.query(`SELECT * FROM users WHERE id = ${req.session.user_id}`);
+      } else {
+        return {};
+      }
+    })
+    .then(data => {
+      let user = {};
+      if (data.rows) {
+        user = data.rows[0];
+      }
+
+      res.render("index", { menu_items, user }); //pushes menu from database to the homepage
     })
 }
 );
