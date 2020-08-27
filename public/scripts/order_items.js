@@ -1,14 +1,15 @@
-const { parse } = require("dotenv");
-const { json } = require("body-parser");
+// const { parse } = require("dotenv");
+// const { json } = require("body-parser");
 
 $(document).ready(function() {
 
   //empties pre-existing items from container, renders and adds the new item @ top of list
     const renderCartItems = function(cartItemsArr) {
-      $(".cart-items").empty();
+      $("#cart-items").empty();
+      console.log($("#cart-items"));
       for (const cartItem of cartItemsArr) {
         const $cartItemRender = createCartItem(cartItem);
-        $(".cart-items").prepend($cartItemRender);
+        $("#cart-items").prepend($cartItemRender);
       }
     }
 
@@ -27,20 +28,23 @@ $(document).ready(function() {
   //Way to use variable to access any button clicked..?
   // let $addItemButton = $(`#into-cart${menu_item_id}`);
 
-  let $addItemButton = $(`#into-cart`);
-  $addItemButton.on('click', (event) => {
+  let $addItemButton = $('.order_button');
+  console.log($($addItemButton));
+  console.log($($addItemButton).data( "menu-id" ));
+  $addItemButton.on('click', function(event) {
     event.preventDefault();
   //need to use "target" button?
-    let menu_item_id = $addItemButton.dataset.menu.id
-    let order_id = localStorage.getItem("order_id");
-    const stringified = JSON.stringify({"qty" : 1, "menu_item_id" : menu_item_id});
+    console.log($(event.target));
+    console.log($(this));
+    console.log($(this).data( "menu-id" ));
+    let menu_item_id = Number($(this).data( "menu-id" ));
+    let order_id = localStorage.getItem("order_id") ? localStorage.getItem("order_id") : '';
 
-    $.post(`/api/orders/${order_id}`, stringified)
+    $.post(`/api/orders/${order_id}`, {"qty" : 1, "menu_item_id" : menu_item_id})
     //Is the responseString below receiving the post response data from server??
       .then((responseString) => {
-        cartUpdateObjArr = json.parse(responseString)
-        renderCartItems(cartUpdateObjArr);
-        localStorage.setItem('order_id', menu_items.order_id);
+        renderCartItems(responseString);
+        localStorage.setItem('order_id', responseString[0].order_id);
     });
   });
 });

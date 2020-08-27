@@ -27,7 +27,11 @@
   <!--<script type="text/javascript" src="/scripts/cart.js"></script>-->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
-
+  <!--<script type="text/javascript" src="/scripts/app.js"></script>-->
+  <!-- <script type="text/javascript" src="/scripts/order_button.js"></script> -->
+  <script type="text/javascript" src="/scripts/order_items.js"></script>
+  <!--<script type="text/javascript" src="/scripts/app.js"></script>-->
+  <script type="text/javascript" src="/scripts/order_button.js"></script>
 
 
 </head>
@@ -59,9 +63,9 @@
             </div>
             <span class="menu-item-price">$<%= menu_item.price %></span>
 
-            <div class="order_button">
+            <div>
 
-              <button id="into-cart" type="submit" class="btn btn-info">Add to cart</button>
+              <button id="into-cart_<%=menu_item.id%>" data-menu-id="<%=menu_item.id%>" type="submit" class="btn btn-info order_button">Add to cart</button>
             </div>
           </li>
           <% } %>
@@ -81,8 +85,8 @@
       </div>
       <div class="hide-cart">
         <div class="cart-body">
-          <ul class="cart-items">
-            <li class="cart-item">
+          <ul id="cart-items">
+            <!-- <li class="cart-item">
               <div class="cart-item-quantity">1</div>
               <h2 class="cart-item-title">XXXXX</h2>
               <div class="cart-item-price">$xx.xx</div>
@@ -90,8 +94,9 @@
             <li class="cart-item">
               <div class="cart-item-quantity">1</div>
               <h2 class="cart-item-title">XXXXX</h2>
+              <div class="cart-item-price">$xx.xx</div>
               <div class="cart-item-price">Your cart is empty</div>
-            </li>
+            </li> -->
 
           </ul>
           <div class="cart-total">
