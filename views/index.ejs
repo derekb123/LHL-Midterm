@@ -24,39 +24,28 @@
 
   <!-- Scripts -->
   <script type="text/javascript" src="/scripts/menus.js"></script>
-  <script type="text/javascript" src="/scripts/cart.js"></script>
+  <!--<script type="text/javascript" src="/scripts/cart.js"></script>-->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <!--<script type="text/javascript" src="/scripts/app.js"></script>-->
   <!-- <script type="text/javascript" src="/scripts/order_button.js"></script> -->
   <script type="text/javascript" src="/scripts/order_items.js"></script>
+  <!--<script type="text/javascript" src="/scripts/app.js"></script>-->
+  <script type="text/javascript" src="/scripts/order_button.js"></script>
 
 
 </head>
 
 <body>
-  <!-- Top nav bar (fixed) -->
   <nav>
-    <div class="nav-content">
-      <span id="logo">RestO</span>
-      <div id="user-area">
-        <span id="user-name">Welcome USERNAME</span>
-
-      </div>
-      <div class="stacked">
-        <span id="login"><b>Logout</b></span>
-
-      </div>
-    </div>
+    <%- include("./partials/_navbar") %>
   </nav>
+
   <!--Header-->
   <header>
-    <div id="image-header">
-      <img src="https://github.com/JennyC2020/LHL-Midterm/blob/master/planning/Takeout-delivery.png?raw=true">
-    </div>
-    <div>
-    </div>
+    <%- include("./partials/_header") %>
   </header>
+
   <main class="main-container">
     <div class="menu-container">
       <section class="menu-group">
@@ -90,7 +79,7 @@
 
     <div class="cart-container">
       <div class="cart-header">
-        <span class="" style="font-size: 16px;font-weight: 500;color: white">JenCaiDer Restaurant</span><br>
+        <span class="" style="font-size: 16px;font-weight: 500;color: white">RestO</span><br>
         <span class="" style="font-size: 12px;color: white">7344 Green Drive</span>
         <span class="" style="font-size: 12px;color: white">Vancouver, BC, V8R3T8</span>
       </div>
@@ -130,16 +119,10 @@
 
 </body>
 
-<!-- Footer -->
-<footer class="page-footer font-small blue">
 
-  <!-- Copyright -->
-  <div class="footer-copyright text-center py-3">© 2020 RestO | Open daily 11am - 10pm |
-    <a href="https://mdbootstrap.com/">Phone : 1-888-123-1234</a>
-  </div>
-  <!-- Copyright -->
-
+<footer>
+  <%- include("./partials/_footer") %>
 </footer>
-<!-- Footer -->
+
 
 </html>

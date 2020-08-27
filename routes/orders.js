@@ -7,6 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
+const sendSms = require('./twilio');
 
 module.exports = (db) => {
 
@@ -116,7 +117,66 @@ router.post("/:order_id?", (req, res) => {
   });
 });
 
+router.post("/:order_id/submit/", (req, res) => {
+  const query = `
+    UPDATE orders
+    SET order_status = $1
+    WHERE orders.id = $2;
+    `;
 
+  db.query(query, ['complete', req.params.order_id])
+    .then(() => {
+      const query = `
+        SELECT users.phone FROM users
+        JOIN orders ON user_id = users.id
+        WHERE orders.id = $1;
+      `;
+
+      db.query(query, [req.params.order_id])
+      .then((data) => {
+        const phoneNumber = data.rows[0].phone;
+        const customerMsg = "Order successfully placed! Your order will be ready in 20 minutes.";
+        const restaurantMsg = "You have an order";
+
+        sendSms(phoneNumber, customerMsg);
+        sendSms('+17786289669',restaurantMsg); //We need to know who will be the restaurant in the presentation, and input number here
+        res
+          .status(200)
+          .send("Success");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err });
+      })
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err });
+    });
+});
+
+// router.post("/orders/:id/submit", (req, res) => {
+//   console.log(res.body.data);
+//   // const
+//   let query = `
+//     SELECT * FROM orders
+//     WHERE orders.id = $1;
+//     `;
+//   db.query(query, [res.body.data])
+//     .then(data => {
+//       console.log(data);
+//       const userId = data.rows.id;
+//       return userId;
+//     })
+//     .then(console.log(userId))
+//     .catch(err => err)
+// });
+
+
+  // router.post("/orders/:ordered_item_id/delete", (req, res) => {
+  //   console.log('orders/id: works!');
   // router.post("/orders/:id/submit", (req, res) => {
   //   console.log(' works!');
   //   let query = `
@@ -135,6 +195,9 @@ router.post("/:order_id?", (req, res) => {
   //         .json({ error: err.message });
   //     });
   // });
+
+
+
 
   return router;
 };
