@@ -29,6 +29,7 @@ module.exports = (db) => {
   router.post('/logout', (req, res) => {
     req.session.user_id = null;
     res.send({});
+    res.redirect("/login");
   });
 
   return router;
