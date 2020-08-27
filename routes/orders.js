@@ -242,6 +242,7 @@ router.post("/:order_id/submit/", (req, res) => {
     SET order_status = $1
     WHERE orders.id = $2;
     `;
+
   db.query(query, ['complete', req.params.order_id])
     .then(() => {
       const query = `
@@ -249,12 +250,15 @@ router.post("/:order_id/submit/", (req, res) => {
         JOIN orders ON user_id = users.id
         WHERE orders.id = $1;
       `;
+
       db.query(query, [req.params.order_id])
       .then((data) => {
         const phoneNumber = data.rows[0].phone;
-        const msg = "Order successfully placed! Your order will be ready in 20 minutes.";
-        sendSms(phoneNumber, msg);
-        console.log("Finished sending SMS")
+        const customerMsg = "Order successfully placed! Your order will be ready in 20 minutes.";
+        const restaurantMsg = "You have an order";
+
+        sendSms(phoneNumber, customerMsg);
+        sendSms('+17786289669',restaurantMsg); //We need to know who will be the restaurant in the presentation, and input number here
         res
           .status(200)
           .send("Success");
