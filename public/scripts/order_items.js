@@ -27,6 +27,16 @@ $(document).ready(function() {
   //Way to use variable to access any button clicked..?
   // let $addItemButton = $(`#into-cart${menu_item_id}`);
 
+
+  // Window.on('storage', function(event) {console.log('storage change noted')};
+  $(window).on("storage", function(){console.log('storage change noted')});
+
+  window.addEventListener('storage', () => {
+    // When local storage changes, dump the list to
+    // the console.
+    console.log('storage change noted');
+  });
+
   let $addItemButton = $('.order_button');
   $addItemButton.on('click', function(event) {
     event.preventDefault();

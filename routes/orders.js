@@ -126,7 +126,7 @@ router.post("/:order_id/submit/", (req, res) => {
     WHERE orders.id = $2;
     `;
   const userId = req.session.user_id;
-  
+
   db.query(query, ['complete', userId])
     .then(() => {
       const query = `
@@ -143,6 +143,7 @@ router.post("/:order_id/submit/", (req, res) => {
 
         sendSms(phoneNumber, customerMsg);
         sendSms('+17786289669',restaurantMsg); //We need to know who will be the restaurant in the presentation, and input number here
+        console.log('made it to line 146');
         res
           .status(200)
           .send("Success");

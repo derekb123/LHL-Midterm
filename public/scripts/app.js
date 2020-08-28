@@ -9,13 +9,24 @@ $(() => {
   //   }
   // });;
 
+  const clearUserId = () => {
+    localStorage.clear();
+  }
+
+  const onError = () => {
+    localStorage.clear();
+  }
+
+
   $('#order-now').click( function() {
     event.preventDefault();
+    $("#cart-items").empty();
     $.ajax({
       method: "POST",
-      url: "/api/orders/1/submit/"
+      url: "/api/orders/1/submit/",
+      success: clearUserId,
+      error: onError
     })
-    localStorage.clear();
   });
 
   $('#logout').click(() => {
