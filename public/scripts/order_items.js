@@ -12,30 +12,48 @@ $(document).ready(function() {
       }
     }
 
+    const renderTotals = function(orderObj) {
+      $(".cart-total").empty();
+      const $cartTotals = updateCartTotals(orderObj);
+        $(".cart-total").prepend($cartTotals);
+      }
+
   //composes cart item as template literal string in html format
   const createCartItem = function(orderItem) {
+      let itemTotals;
       const $cartItem =(`
         <li class="cart-item">
           <div class="cart-item-quantity">${orderItem.qty}</div>
           <h2 class="cart-item-title">${orderItem.dish}</h2>
-          <div class="cart-item-price">${orderItem.price}</div>
+          <div class="cart-item-price">$${orderItem.price}</div>
         </li>
         `);
     return $cartItem;
   }
 
+  const updateCartTotals = function(objs) {
+      let fullTotal = 0;
+      let timeTotal = 0;
+      for (obj of objs) {
+        // console.log(obj.price);
+        // console.log(obj.qty);
+        // console.log(obj.prep_time);
+        fullTotal += Number((obj.price * obj.qty));
+        timeTotal += Number((obj.prep_time * obj.qty));
+      }
+
+      const $totalsElement =(`
+        <li class="cart-item">
+        <div class="cart-total-amount"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">Your order total is <strong>$${fullTotal}</strong></span>
+        <div class="cart-total-time"><span class="" style="color: rgba(38,42,52,1);font-size: 12px;">Your estimated order time is <strong>${timeTotal} minutes </strong></span>
+        </li>
+        `);
+    return $totalsElement;
+  }
+
   //Way to use variable to access any button clicked..?
   // let $addItemButton = $(`#into-cart${menu_item_id}`);
 
-
-  // Window.on('storage', function(event) {console.log('storage change noted')};
-  $(window).on("storage", function(){console.log('storage change noted')});
-
-  window.addEventListener('storage', () => {
-    // When local storage changes, dump the list to
-    // the console.
-    console.log('storage change noted');
-  });
 
   let $addItemButton = $('.order_button');
   $addItemButton.on('click', function(event) {
@@ -49,6 +67,9 @@ $(document).ready(function() {
     //Is the responseString below receiving the post response data from server??
       .then((responseString) => {
         renderCartItems(responseString);
+        console.log(responseString);
+        renderTotals(responseString);
+
         localStorage.setItem('order_id', responseString[0].order_id);
         console.log('order_items.js ln43 local storage:', localStorage)
     });
