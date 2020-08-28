@@ -101,15 +101,17 @@
 
           </ul>
           <div class="cart-total">
-            <div class="cart-total-label"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">Total</span>
+            <div class="cart-total-label"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;"></span>
             </div>
-            <div class="cart-total-amount"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;">xx.00</span>
+            <div class="cart-total-amount"><span class="" style="color: rgba(38,42,52,1);font-size: 17px;"></span>
             </div>
           </div>
         </div>
 
-        <div class="cart-footer">
-          <button id="order-now" type="button" class="btn btn-dark btn-block" type="submit">Order now</button>
+
+        <div class="cart-footer" onclick="myFunction()">
+          <button id="order-now" type="button" class="btn btn-dark btn-block" type="submit">Order
+            now</button>
         </div>
       </div>
     </div>
@@ -124,6 +126,10 @@
 <footer>
   <%- include("./partials/_footer") %>
 </footer>
-
+<script>
+  function myFunction() {
+    alert("Your order has been processed. You will receive a confirmation shortly");
+  }
+</script>
 
 </html>

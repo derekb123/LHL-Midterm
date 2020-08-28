@@ -18,7 +18,7 @@ $(() => {
   }
 
 
-  $('#order-now').click( function() {
+  $('#order-now').click(function() {
     event.preventDefault();
     $("#cart-items").empty();
     $.ajax({
@@ -27,6 +27,7 @@ $(() => {
       success: clearUserId,
       error: onError
     })
+
   });
 
   $('#logout').click(() => {
