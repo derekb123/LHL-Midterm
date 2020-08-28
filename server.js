@@ -94,9 +94,9 @@ app.get("/", (req, res) => {
 
 // deletes all cookies
 app.post("/logout", (req, res) => {
-  req.session.type = null;
+  req.session.user_id = null;
   res.redirect("/");
-});
+})
 
 
 app.listen(PORT, () => {
