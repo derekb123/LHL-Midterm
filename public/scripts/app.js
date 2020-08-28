@@ -15,6 +15,7 @@ $(() => {
       method: "POST",
       url: "/api/orders/1/submit/"
     })
+    localStorage.clear();
   });
 
   $('#logout').click(() => {

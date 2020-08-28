@@ -33,12 +33,14 @@ $(document).ready(function() {
   //need to use "target" button?
     let menu_item_id = Number($(this).data( "menu-id" ));
     let order_id = localStorage.getItem("order_id") ? localStorage.getItem("order_id") : '';
+    console.log('order_items.js ln36 order_id:', order_id)
 
     $.post(`/api/orders/${order_id}`, {"qty" : 1, "menu_item_id" : menu_item_id})
     //Is the responseString below receiving the post response data from server??
       .then((responseString) => {
         renderCartItems(responseString);
         localStorage.setItem('order_id', responseString[0].order_id);
+        console.log('order_items.js ln43 local storage:', localStorage)
     });
   });
 });
