@@ -8,6 +8,7 @@
 const express = require('express');
 const router  = express.Router();
 const sendSms = require('../public/scripts/twilio');
+const cookieSession = require('cookie-session');
 
 module.exports = (db) => {
 
@@ -124,8 +125,9 @@ router.post("/:order_id/submit/", (req, res) => {
     SET order_status = $1
     WHERE orders.id = $2;
     `;
-
-  db.query(query, ['complete', req.params.order_id])
+  const userId = req.session.user_id;
+  
+  db.query(query, ['complete', userId])
     .then(() => {
       const query = `
         SELECT users.phone FROM users
@@ -133,7 +135,7 @@ router.post("/:order_id/submit/", (req, res) => {
         WHERE orders.id = $1;
       `;
 
-      db.query(query, [req.params.order_id])
+      db.query(query, [userId])
       .then((data) => {
         const phoneNumber = data.rows[0].phone;
         const customerMsg = "Order successfully placed! Your order will be ready in 20 minutes.";

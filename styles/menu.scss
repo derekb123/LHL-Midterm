@@ -1,7 +1,7 @@
 .menu-container {
   display: flex;
   flex-direction: column;
-  width: 600px;
+  width: 800px;
   margin-left: 50px;
 }
 .menu-group {
@@ -26,11 +26,11 @@
   word-wrap: break-word;
 }
 .menu-image {
-  width: 25%;
+  width: 30%;
 
 }
 .menu-item-text {
-  width: 100%;
+  width: 70%;
   font-family: 'Roboto Condensed', sans-serif;
   padding: 15px;
 }
@@ -48,4 +48,5 @@
 .menu-item-price {
   font-size: 17px;
   font-weight: 300;
+  padding-right: 20px;
 }
