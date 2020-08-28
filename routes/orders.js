@@ -126,8 +126,10 @@ router.post("/:order_id/submit/", (req, res) => {
     WHERE orders.id = $2;
     `;
   const userId = req.session.user_id;
-
-  db.query(query, ['complete', userId])
+  const {order_id} = req.params;
+  console.log(req.params)
+  console.log('orderid', req.param.order_id);
+  db.query(query, ['complete', order_id])
     .then(() => {
       const query = `
         SELECT users.phone, users.name FROM users
@@ -139,6 +141,8 @@ router.post("/:order_id/submit/", (req, res) => {
       .then((data) => {
         const phoneNumber = data.rows[0].phone;
         const name = data.rows[0].name;
+
+        console.log(data.rows[0]);
         const customerMsg = `Hi ${name}! Thanks for ordering with RestO. Your estimated order time is 20 minutes. Payment is due upon pick-up`;
         const restaurantMsg = "You have an new order!";
 

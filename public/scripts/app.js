@@ -23,7 +23,7 @@ $(() => {
     $("#cart-items").empty();
     $.ajax({
       method: "POST",
-      url: "/api/orders/1/submit/",
+      url: `/api/orders/2/submit/`,
       success: clearUserId,
       error: onError
     })
