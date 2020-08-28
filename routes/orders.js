@@ -125,6 +125,7 @@ router.post("/:order_id/submit/", (req, res) => {
     WHERE orders.id = $2;
     `;
   const userId = req.session.user_id;
+  
   db.query(query, ['complete', userId])
     .then(() => {
       const query = `
@@ -135,8 +136,6 @@ router.post("/:order_id/submit/", (req, res) => {
 
       db.query(query, [userId])
       .then((data) => {
-
-        console.log(data);
         const phoneNumber = data.rows[0].phone;
         const customerMsg = "Order successfully placed! Your order will be ready in 20 minutes.";
         const restaurantMsg = "You have an order";
