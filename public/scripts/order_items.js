@@ -20,12 +20,11 @@ $(document).ready(function() {
 
   //composes cart item as template literal string in html format
   const createCartItem = function(orderItem) {
-      let itemTotals;
       const $cartItem =(`
         <li class="cart-item">
           <div class="cart-item-quantity">${orderItem.qty}</div>
           <h2 class="cart-item-title">${orderItem.dish}</h2>
-          <div class="cart-item-price">$${orderItem.price}</div>
+          <div class="cart-item-price">$${orderItem.price * orderItem.qty}</div>
         </li>
         `);
     return $cartItem;
