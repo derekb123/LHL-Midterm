@@ -130,7 +130,7 @@ router.post("/:order_id/submit/", (req, res) => {
   db.query(query, ['complete', userId])
     .then(() => {
       const query = `
-        SELECT users.phone FROM users
+        SELECT users.phone, users.name FROM users
         JOIN orders ON user_id = users.id
         WHERE orders.id = $1;
       `;
@@ -138,8 +138,9 @@ router.post("/:order_id/submit/", (req, res) => {
       db.query(query, [userId])
       .then((data) => {
         const phoneNumber = data.rows[0].phone;
-        const customerMsg = "Order successfully placed! Your order will be ready in 20 minutes.";
-        const restaurantMsg = "You have an order";
+        const name = data.rows[0].name;
+        const customerMsg = `Hi ${name}! Thanks for ordering with RestO. Your estimated order time is 20 minutes. Payment is due upon pick-up`;
+        const restaurantMsg = "You have an new order!";
 
         sendSms(phoneNumber, customerMsg);
         sendSms('+17786289669',restaurantMsg); //We need to know who will be the restaurant in the presentation, and input number here
