@@ -1,7 +1,6 @@
-/*
- * All routes for orders are defined here
+/* All routes for orders are defined here
  * Since this file is loaded in server.js into api/orders,
- *   these routes are mounted onto /orders
+ * these routes are mounted onto /orders
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -13,12 +12,11 @@ const cookieSession = require('cookie-session');
 module.exports = (db) => {
 
 //For orders. The "cart" is an order with order_status: pending.
-
-//General route to adjust order_items quantity in database. AJAX request to define qty.
-
+//General route to adjust order_items quantity in database. Request to define qty.
 
 
-// UPSERT UPDATE AND INSERT ORDER ITEM ID
+
+// Upser (update and insert) oder item id
 const createNewOrderItem = (order_id, menu_item_id, qty)  => {
   let newOrderItemQuery = `
     INSERT INTO ordered_items (order_id, menu_item_id, qty)
@@ -35,11 +33,9 @@ const createNewOrderItem = (order_id, menu_item_id, qty)  => {
     return db.query(newOrderItemQuery, [order_id, menu_item_id, qty])
       .then(data => {
         console.log('end of create new order item');
-        // const newOrderItem = data.rows[0];
         return order_id;
       })
 };
-
 
 const deleteOrderItem = (order_id, menu_item_id)  => {
   let deleteOrderItemQuery = `
@@ -53,6 +49,8 @@ const deleteOrderItem = (order_id, menu_item_id)  => {
       })
 };
 
+/*Upon first menu item 'added' to cart: First: Creates new order,
+Then: calls createNewOrderItem to create the menu item that was submitted*/
 const createNewOrder = (user_id, menu_item_id, qty) => {
   let createOrderQuery = `
   INSERT INTO orders (user_id, order_status)
@@ -68,20 +66,17 @@ const createNewOrder = (user_id, menu_item_id, qty) => {
       console.log('end of create new order');
       return createNewOrderItem(newOrder.id, menu_item_id, qty)
     })
-    // .then(data => {
-    //   return {message: 'created cart and added order item'}
-    // })
 };
 
-
-
-
+//Conditional paths to execute correct functions
+//Updates the database
+//Sends back updated object to re-render cart
 router.post("/:order_id?", (req, res) => {
   let promise = Promise.resolve()
   const {order_id} = req.params;
   const {qty, menu_item_id} = req.body;
   console.log(req.body);
-  if (order_id /*&& order_satus === 'PENDING'*/) {
+  if (order_id) {
     if (qty) {
       console.log('create new order item');
       promise = createNewOrderItem(order_id, menu_item_id, qty)
@@ -90,16 +85,11 @@ router.post("/:order_id?", (req, res) => {
       console.log('route to delete order item')
       promise = deleteOrderItem(order_id, menu_item_id);
     }
-    // else if (req.body.qty > 0) {
-    //   console.log('update order item');
-    //   promise = updateOrderItem(order_id, menu_item_id, req.body.qty)
-    // }
   } else{
     console.log('create order');
     promise = createNewOrder(/*req.session.user_id*/ 1, menu_item_id, req.body.qty);
   }
   promise.then(orderID => {
-    //return db.query('SELECT * FROM orders where orders.id = $1;', [orderID])
     return db.query(`SELECT ordered_items.*, menu_items.*
     FROM ordered_items
     JOIN menu_items
@@ -161,64 +151,6 @@ router.post("/:order_id/submit/", (req, res) => {
         .json({ error: err });
     });
 });
-
-// router.post("/orders/:id/submit", (req, res) => {
-//   console.log(res.body.data);
-//   // const
-//   let query = `
-//     SELECT * FROM orders
-//     WHERE orders.id = $1;
-//     `;
-//   db.query(query, [res.body.data])
-//     .then(data => {
-//       console.log(data);
-//       const userId = data.rows.id;
-//       return userId;
-//     })
-//     .then(console.log(userId))
-//     .catch(err => err)
-// });
-
-
-  // router.post("/orders/:ordered_item_id/delete", (req, res) => {
-  //   console.log('orders/id: works!');
-  // router.post("/orders/:id/submit", (req, res) => {
-  //   console.log(' works!');
-  //   let query = `
-  //     UPDATE orders (order_status)
-  //     VALUES ($1)
-  //     WHERE orders.id = $2;
-  //     `;
-  //   db.query(query, ['complete', req.params.id])
-  //     .then(data => {
-  //       const items = data.rows;
-  //       res.json({ items });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
-
-  // const checkStatus = (order_id) => {
-//   let checkStatusQuery = `
-//   SELECT order_status
-//   FROM orders
-//   WHERE order_id = $1;
-//   `;
-//   return db.query(checkStatusQuery, [order_id])
-//     .then(data => {
-//       const order_status = data.rows;
-//       return order_status;
-//     });
-//     // .then(data => {
-//     //   return {message: 'created cart and added order item'}
-//     // })
-// };
-
-
-
 
   return router;
 };

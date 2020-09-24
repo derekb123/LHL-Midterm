@@ -1,5 +1,4 @@
-// const { parse } = require("dotenv");
-// const { json } = require("body-parser");
+
 
 $(document).ready(function() {
 
@@ -34,9 +33,6 @@ $(document).ready(function() {
       let fullTotal = 0;
       let timeTotal = 0;
       for (obj of objs) {
-        // console.log(obj.price);
-        // console.log(obj.qty);
-        // console.log(obj.prep_time);
         fullTotal += Number((obj.price * obj.qty));
         timeTotal += Number((obj.prep_time * obj.qty));
       }
@@ -50,48 +46,21 @@ $(document).ready(function() {
     return $totalsElement;
   }
 
-  //Way to use variable to access any button clicked..?
-  // let $addItemButton = $(`#into-cart${menu_item_id}`);
-
 
   let $addItemButton = $('.order_button');
   $addItemButton.on('click', function(event) {
     event.preventDefault();
-  //need to use "target" button?
     let menu_item_id = Number($(this).data( "menu-id" ));
     let order_id = localStorage.getItem("order_id") ? localStorage.getItem("order_id") : '';
     console.log('order_items.js ln36 order_id:', order_id)
 
     $.post(`/api/orders/${order_id}`, {"qty" : 1, "menu_item_id" : menu_item_id})
-    //Is the responseString below receiving the post response data from server??
       .then((responseString) => {
         renderCartItems(responseString);
-        console.log(responseString);
         renderTotals(responseString);
 
         localStorage.setItem('order_id', responseString[0].order_id);
-        console.log('order_items.js ln43 local storage:', localStorage)
     });
   });
 });
-
-  //***NOTES***/
-  //INCREMENT QUANITY: QTY ++
-
-  //JSON.stringify instead of serialize
-
-  // order_id = document.getElementById("order_id").value;
-  //MIGHT WANT TO USE FORMS SO THAT
-  //THE SECOND ARGUMENT IN .POST IS THE BODY INFORMATION, WHICH IS SERIALZED BEFORE SENDING
-
-  //FOR LOOP TO GO THROUGH MENU ITEMS, GENERATE LI TAGS AS WE GO THROUGH!
-  //[STRETCH - EDGE CASES LIKE IF MENU ITEMS IS EMPTY]
-  //APPEND OR PREPEND??
-
-  // LOADMENU ITEMS FUNCTION THAT CALLS OTHER ABOVE FUNCTIONS AND IS CALLED IN THE POST QUERY
-  // loadMenuItems(menu_items){
-  //   loopThroughItems() {
-  //     somethingelse ()
-  //   }
-  // }
 
